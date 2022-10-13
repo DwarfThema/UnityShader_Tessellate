@@ -1,5 +1,6 @@
 ﻿    Shader "Tessellation Sample" {
         Properties {
+            _Tess ("Tessellation", Range(1,32)) = 4
             _MainTex ("Base (RGB)", 2D) = "white" {}
             _DispTex ("Disp Texture", 2D) = "gray" {}
             _NormalMap ("Normalmap", 2D) = "bump" {}
@@ -12,7 +13,7 @@
             LOD 300
             
             CGPROGRAM
-            #pragma surface surf BlinnPhong addshadow fullforwardshadows vertex:disp nolightmap
+            #pragma surface surf BlinnPhong addshadow fullforwardshadows vertex:disp tessellate:tessFixed nolightmap
             #pragma target 4.6
 
             struct appdata {
@@ -21,6 +22,13 @@
                 float3 normal : NORMAL;
                 float2 texcoord : TEXCOORD0;
             };
+
+            float _Tess;
+
+            float4 tessFixed()
+            {
+                return _Tess;
+            }
 
             sampler2D _DispTex;
             float _Displacement;
