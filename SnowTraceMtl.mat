@@ -42,5 +42,5 @@ Material:
     - _Tess: 14.1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _GroundColor: {r: 1, g: 1, b: 1, a: 1}
+    - _GroundColor: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
     - _SnowColor: {r: 1, g: 1, b: 1, a: 1}
