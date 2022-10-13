@@ -11,6 +11,11 @@ public class DrawWithMouse : MonoBehaviour
     private Material _snowMaterial, _drawMaterial;
     private RaycastHit _hit;
 
+    [Range(1, 500)]
+    public float _brushSize;
+    [Range(0, 1)]
+    public float _brushStrength;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +37,9 @@ public class DrawWithMouse : MonoBehaviour
             if (Physics.Raycast(_camera.ScreenPointToRay(Input.mousePosition), out _hit))
             {
                 _drawMaterial.SetVector("_Coordinate", new Vector4(_hit.textureCoord.x, _hit.textureCoord.y, 0, 0));
+                _drawMaterial.SetFloat("_Strength", _brushStrength);
+                _drawMaterial.SetFloat("_Size", _brushSize);
+
                 RenderTexture temp = RenderTexture.GetTemporary(_splatmap.width, _splatmap.height, 0, RenderTextureFormat.ARGBFloat);
                 Graphics.Blit(_splatmap, temp);
                 Graphics.Blit(temp, _splatmap, _drawMaterial);
